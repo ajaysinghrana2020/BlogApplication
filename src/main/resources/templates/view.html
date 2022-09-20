@@ -1,0 +1,133 @@
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Home</title>
+  <style>
+    body {
+      font-family: Helvetica, sans-serif;
+    }
+    #result-set {
+      background-color: #2F4454;
+      padding: 5%;
+      margin-bottom: 5%;
+    }
+
+    #grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 10px;
+    }
+    #grid-items {
+      background-color: #eee8e7;
+      padding: 10px;
+    }
+    #grid-labels {
+      font-weight: bold;
+    }
+    .grid-item {
+      font-size: 0.8rem;
+      font-weight: lighter;
+    }
+    #grid-content {
+      height: 20vh;
+      background-color: #eee8e7;
+      padding: 10px;
+      margin: 3% 0 3% 0;
+    }
+    #grid-buttons {
+      display: flex;
+      justify-content: space-around;
+    }
+    .grid-button comment-box {
+      all: unset;
+      color: black;
+      background-color: #eee8e7;
+      padding: 1% 5% 1% 5%;
+      border-radius: 25px;
+      margin-inline: 10%;
+    }
+    .grid-button:hover {
+      background-color: #d2cac9;
+    }
+    .grid-button a{
+      text-decoration: none;
+    }
+    #comment-box, #post {
+        border: none;
+        border-radius: 5px;
+        padding: 20px;
+        margin: 20px;
+    }
+    #post:hover{
+        background-color: deeppink;
+    }
+  </style>
+</head>
+
+<body>
+<h1>
+  Show Values
+</h1>
+<a th:href="@{'/createblog'}">Create new Blog</a>
+
+<div id="result-set"  th:each="persons : ${listOfPosts}">
+  <div id="grid-container">
+            <div id="grid-items">
+                <div id="grid-labels">ID:</div>
+                <div class="grid-item"  th:text="${persons.id}">1</div>
+            </div>
+    <div id="grid-items">
+      <div id="grid-labels">Title:</div>
+      <div class="grid-item"  th:text="${persons.title}">2</div>
+    </div>
+    <div id="grid-items">
+      <div id="grid-labels">Excerpt:</div>
+      <div class="grid-item"  th:text="${persons.excerpt}">3</div>
+    </div>
+    <div id="grid-items">
+      <div id="grid-labels">Author:</div>
+      <div class="grid-item"  th:text="${persons.author}">5</div>
+    </div>
+            <div id="grid-items">
+                <div id="grid-labels">Published at:</div>
+                <div class="grid-item"  th:text="${persons.publishedAt}">6</div>
+            </div>
+            <div id="grid-items">
+                <div id="grid-labels">is Published:</div>
+                <div class="grid-item" th:text="${persons.isPublished}">7</div>
+            </div>
+    <div id="grid-items">
+      Title        <div id="grid-labels">Created at:</div>
+      <div class="grid-item" th:text="${persons.createdAt}">8</div>
+    </div>
+    <div id="grid-items">
+      <div id="grid-labels">Updated at:</div>
+      <div class="grid-item"  th:text="${persons.updatedAt}">9</div>
+    </div>
+  </div>
+      <div id="grid-content">
+          <div id="grid-labels">Content:</div>
+          <div class="grid-item" th:text="${persons.content}">4</div>
+      </div>
+    <form id="grid-buttons" action="createcomment" method="post">
+        <h3>Give Any Comment</h3>
+        <div id="yoo">
+            <input type="text" id="comment-box" name="name" placeholder="Name">
+            <input type="email" id="comment-box" name="email" placeholder="Email">
+            <textarea type="text" id="comment-box" name="comment" placeholder="Comment"></textarea>
+
+             <button  class="grid-button" th:value="${listOfPosts.getId()}"  name="laura">post</button>
+        </div>
+
+
+
+
+    </form >
+
+</div>
+
+
+
+</body>
+</html>

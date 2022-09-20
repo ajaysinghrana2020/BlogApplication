@@ -1,0 +1,131 @@
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home</title>
+    <style>
+        body {
+            font-family: Helvetica, sans-serif;
+        }
+        #result-set {
+            background-color: #2F4454;
+            padding: 5%;
+            margin-bottom: 5%;
+        }
+
+        #grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
+        }
+        #grid-items {
+            background-color: #eee8e7;
+            padding: 10px;
+        }
+        #grid-labels {
+            font-weight: bold;
+        }
+        .grid-item{
+            font-size: 0.8rem;
+            font-weight: lighter;
+        }
+        #grid-content {
+            height: 20vh;
+            background-color: #eee8e7;
+            padding: 10px;
+            margin: 3% 0 3% 0;
+        }
+        #grid-buttons {
+            display: flex;
+            padding: 30px;
+            justify-content: space-around;
+        }
+        .grid-button {
+            all: unset;
+            color: black;
+            background-color: #eee8e7;
+            padding: 1% 5% 1% 5%;
+            border-radius: 25px;
+            margin-inline: 10%;
+        }
+        .grid-button:hover {
+            background-color: #d2cac9;
+        }
+        .grid-button a{
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+<h1>
+    Show Values
+</h1>
+<a th:href="@{'/write'}">Create new Blog</a>
+
+<div id="result-set"  th:each="persons : ${listOfPosts}">
+
+    <p th:text="${persons.getId()}"/>
+
+
+    <div id="grid-container">
+<!--        <div id="grid-items">-->
+<!--            <div id="grid-labels">ID:</div>-->
+<!--            <div class="grid-item"  th:text="${persons.id}">1</div>-->
+<!--        </div>-->
+        <div id="grid-items">
+            <div id="grid-labels">Title:</div>
+            <div class="grid-item"  th:text="${persons.title}">2</div>
+        </div>
+        <div id="grid-items">
+            <div id="grid-labels">Excerpt:</div>
+            <div class="grid-item"  th:text="${persons.excerpt}">3</div>
+        </div>
+        <div id="grid-items">
+            <div id="grid-labels">Author:</div>
+            <div class="grid-item"  th:text="${persons.author}">5</div>
+        </div>
+<!--        <div id="grid-items">-->
+<!--            <div id="grid-labels">Published at:</div>-->
+<!--            <div class="grid-item"  th:text="${persons.publishedAt}">6</div>-->
+<!--        </div>-->
+<!--        <div id="grid-items">-->
+<!--            <div id="grid-labels">is Published:</div>-->
+<!--            <div class="grid-item" th:text="${persons.isPublished}">7</div>-->
+<!--        </div>-->
+        <div id="grid-items">
+    Title        <div id="grid-labels">Created at:</div>
+            <div class="grid-item" th:text="${persons.createdAt}">8</div>
+        </div>
+        <div id="grid-items">
+            <div id="grid-labels">Updated at:</div>
+            <div class="grid-item"  th:text="${persons.updatedAt}">9</div>
+        </div>
+    </div>
+<!--    <div id="grid-content">-->
+<!--        <div id="grid-labels">Content:</div>-->
+<!--        <div class="grid-item" th:text="${persons.content}">4</div>-->
+<!--    </div>-->
+    <form id="grid-buttons" action="update/{persons.getId()}" method="post">
+        <button  class="grid-button" th:value="${persons.getId()}" name="laura">Update</button>
+    </form>
+    <form id="grid-buttons" action="view" method="post">
+        <button  class="grid-button" th:value="${persons.getId()}" name="laura">View</button>
+    </form>
+    <form id="grid-buttons" action="delete" method="post">
+        <button  class="grid-button" th:value="${persons.getId()}" name="laura">Delete</button>
+    </form>
+<!--    <div >-->
+<!--        <div  class="grid-button"><a th:href="@{'/edit/' + ${persons.id}}">Edit</a></div>-->
+
+
+<!--&lt;!&ndash;       <button class="grid-button" th:value="${persons.getId()}" name="laura"><div ><a th:href="@{'/view'}"><td>View</td></a></div></button>&ndash;&gt;-->
+
+
+<!--        <div class="grid-button"><td><a th:href="@{'/users/delete' + ${persons.id}}">Delete</a></td></div>-->
+<!--    </div>-->
+</div>
+
+
+</body>
+</html>

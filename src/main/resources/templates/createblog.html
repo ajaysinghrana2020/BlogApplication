@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Create Blog</title>
+</head>
+<style >
+    label {
+        display: inline-block;
+        width: 200px;
+        margin: 5px;
+        text-align: left;
+    }
+    input[type=text], input[type=password], select {
+        display: inline-block;
+        width: 200px;
+    }
+    input[type=radio] {
+        margin-left: 45px;
+    }
+    input[type=checkbox] {
+        margin-right: 190px;
+    }
+    button {
+        padding: 5px;
+        margin: 10px;
+    }
+</style>
+<body>
+<div >
+    <h1>Create A Blog</h1>
+    <form action="createblog"  method="post" >
+
+        <label>Title:</label>
+        <input type="text"  name="title" /><br>
+
+        <label>Tags:</label>
+        <input type="text" name="tag" /><br>
+
+        <label>content:</label>
+        <textarea rows="5" cols="25" name="content"></textarea>
+        <br>
+
+        <label>Author:</label>
+        <input type="text"  name="author" /><br/>
+
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>
