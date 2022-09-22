@@ -106,24 +106,16 @@
 <!--        <div id="grid-labels">Content:</div>-->
 <!--        <div class="grid-item" th:text="${persons.content}">4</div>-->
 <!--    </div>-->
-    <form id="grid-buttons" action="update/{persons.getId()}" method="post">
-        <button  class="grid-button" th:value="${persons.getId()}" name="laura">Update</button>
+    <form id="grid-buttons" action="update" method="get">
+        <button  class="grid-button" th:value="${persons.getId()}" name="update">Update</button>
     </form>
-    <form id="grid-buttons" action="view" method="post">
+    <form id="grid-buttons" action="view" method="get">
         <button  class="grid-button" th:value="${persons.getId()}" name="laura">View</button>
     </form>
-    <form id="grid-buttons" action="delete" method="post">
-        <button  class="grid-button" th:value="${persons.getId()}" name="laura">Delete</button>
+    <form id="grid-buttons" action="delete" method="get">
+        <button  class="grid-button" th:value="${persons.getId()}" name="delete">Delete</button>
     </form>
-<!--    <div >-->
-<!--        <div  class="grid-button"><a th:href="@{'/edit/' + ${persons.id}}">Edit</a></div>-->
 
-
-<!--&lt;!&ndash;       <button class="grid-button" th:value="${persons.getId()}" name="laura"><div ><a th:href="@{'/view'}"><td>View</td></a></div></button>&ndash;&gt;-->
-
-
-<!--        <div class="grid-button"><td><a th:href="@{'/users/delete' + ${persons.id}}">Delete</a></td></div>-->
-<!--    </div>-->
 </div>
 
 

@@ -13,7 +13,7 @@ public class CommentService {
     @Autowired
     CommentRepository commentRepository;
 
-    public List<Comment> getListOfComments(Integer id){
+    public List<Comment> getListOfComments(){
         List<Comment> listOfComments = commentRepository.findAll();
 
         return  listOfComments;

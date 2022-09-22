@@ -3,6 +3,7 @@ package com.example.blogapplication.model.entities;
 import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -20,4 +21,6 @@ public class Tag {
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+    @ManyToMany( cascade = {CascadeType.ALL})
+    private List<Post> post;
 }

@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface UsersRepository extends JpaRepository<Users,Integer> {
-    @Query(value = "select * from comments where user_id = :value",nativeQuery = true)
-    List<Users> getUserDetails(int value);
+//    @Query(value = "select * from comments where user_id = :value",nativeQuery = true)
+//    List<Users> getUserDetails(int value);
 }

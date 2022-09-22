@@ -5,6 +5,7 @@ import com.example.blogapplication.repository.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,14 +15,17 @@ public class TagsService {
     TagsRepository tagsRepository;
 
     public void saveTags(Tag tag){
+
         tagsRepository.save(tag);
     }
 
-    public Tag getTags(Integer id) throws UserNotFoundException {
-        Optional<Tag> result = tagsRepository.findById((id));
-        if (result.isPresent()) {
-            return result.get();
+
+    public void insertTags(List<Tag> listOfTags) {
+        for(Tag tag : listOfTags){
+            Optional<String> name = tagsRepository.getName(tag.getName());
+            if(name.isEmpty()){
+                tagsRepository.save(tag);
+            }
         }
-        throw new UserNotFoundException("Cound not found that id" + id);
     }
 }

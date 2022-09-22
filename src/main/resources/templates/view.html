@@ -119,11 +119,16 @@
 
              <button  class="grid-button" th:value="${listOfPosts.getId()}"  name="laura">post</button>
         </div>
-
-
-
-
     </form >
+
+</div>
+<div th:each="com : ${listOfComments}">
+    <div>Name</div>
+    <div  th:text="${com.name}"></div>
+    <div>Email</div>
+    <div  th:text="${com.email}"></div>
+    <div>Comment</div>
+    <div  th:text="${com.comment}"></div>
 
 </div>
 
