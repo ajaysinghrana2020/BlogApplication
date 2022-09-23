@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,6 +19,7 @@ public class Post {
     private int id;
     private String title;
     private String excerpt;
+    @Column(length = 6000)
     private String content;
     private String author;
     @Column(name = "published_at")
@@ -28,6 +30,16 @@ public class Post {
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-    @ManyToMany (mappedBy = "post" ,fetch = FetchType.EAGER)
+    @ManyToMany (cascade = {CascadeType.ALL} )
     private List<Tag> tag;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comment = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Post{" +
+                "comment=" + comment +
+                '}';
+    }
 }

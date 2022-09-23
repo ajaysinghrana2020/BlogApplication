@@ -7,6 +7,7 @@
         body {
             font-family: Helvetica, sans-serif;
         }
+
         #result-set {
             background-color: #2F4454;
             padding: 5%;
@@ -18,28 +19,34 @@
             grid-template-columns: repeat(4, 1fr);
             grid-gap: 10px;
         }
+
         #grid-items {
             background-color: #eee8e7;
             padding: 10px;
         }
+
         #grid-labels {
             font-weight: bold;
         }
-        .grid-item{
+
+        .grid-item {
             font-size: 0.8rem;
             font-weight: lighter;
         }
+
         #grid-content {
             height: 20vh;
             background-color: #eee8e7;
             padding: 10px;
             margin: 3% 0 3% 0;
         }
+
         #grid-buttons {
             display: flex;
             padding: 30px;
             justify-content: space-around;
         }
+
         .grid-button {
             all: unset;
             color: black;
@@ -48,10 +55,12 @@
             border-radius: 25px;
             margin-inline: 10%;
         }
+
         .grid-button:hover {
             background-color: #d2cac9;
         }
-        .grid-button a{
+
+        .grid-button a {
             text-decoration: none;
         }
     </style>
@@ -63,57 +72,58 @@
 </h1>
 <a th:href="@{'/write'}">Create new Blog</a>
 
-<div id="result-set"  th:each="persons : ${listOfPosts}">
+<div id="result-set" th:each="persons : ${listOfPosts}">
 
     <p th:text="${persons.getId()}"/>
 
 
     <div id="grid-container">
-<!--        <div id="grid-items">-->
-<!--            <div id="grid-labels">ID:</div>-->
-<!--            <div class="grid-item"  th:text="${persons.id}">1</div>-->
-<!--        </div>-->
+        <!--        <div id="grid-items">-->
+        <!--            <div id="grid-labels">ID:</div>-->
+        <!--            <div class="grid-item"  th:text="${persons.id}">1</div>-->
+        <!--        </div>-->
         <div id="grid-items">
             <div id="grid-labels">Title:</div>
-            <div class="grid-item"  th:text="${persons.title}">2</div>
+            <div class="grid-item" th:text="${persons.title}">2</div>
         </div>
         <div id="grid-items">
             <div id="grid-labels">Excerpt:</div>
-            <div class="grid-item"  th:text="${persons.excerpt}">3</div>
+            <div class="grid-item" th:text="${persons.excerpt}">3</div>
         </div>
         <div id="grid-items">
             <div id="grid-labels">Author:</div>
-            <div class="grid-item"  th:text="${persons.author}">5</div>
+            <div class="grid-item" th:text="${persons.author}">5</div>
         </div>
-<!--        <div id="grid-items">-->
-<!--            <div id="grid-labels">Published at:</div>-->
-<!--            <div class="grid-item"  th:text="${persons.publishedAt}">6</div>-->
-<!--        </div>-->
-<!--        <div id="grid-items">-->
-<!--            <div id="grid-labels">is Published:</div>-->
-<!--            <div class="grid-item" th:text="${persons.isPublished}">7</div>-->
-<!--        </div>-->
+        <!--        <div id="grid-items">-->
+        <!--            <div id="grid-labels">Published at:</div>-->
+        <!--            <div class="grid-item"  th:text="${persons.publishedAt}">6</div>-->
+        <!--        </div>-->
+        <!--        <div id="grid-items">-->
+        <!--            <div id="grid-labels">is Published:</div>-->
+        <!--            <div class="grid-item" th:text="${persons.isPublished}">7</div>-->
+        <!--        </div>-->
         <div id="grid-items">
-    Title        <div id="grid-labels">Created at:</div>
+            Title
+            <div id="grid-labels">Created at:</div>
             <div class="grid-item" th:text="${persons.createdAt}">8</div>
         </div>
         <div id="grid-items">
             <div id="grid-labels">Updated at:</div>
-            <div class="grid-item"  th:text="${persons.updatedAt}">9</div>
+            <div class="grid-item" th:text="${persons.updatedAt}">9</div>
         </div>
     </div>
-<!--    <div id="grid-content">-->
-<!--        <div id="grid-labels">Content:</div>-->
-<!--        <div class="grid-item" th:text="${persons.content}">4</div>-->
-<!--    </div>-->
-    <form id="grid-buttons" action="update" method="get">
-        <button  class="grid-button" th:value="${persons.getId()}" name="update">Update</button>
+    <!--    <div id="grid-content">-->
+    <!--        <div id="grid-labels">Content:</div>-->
+    <!--        <div class="grid-item" th:text="${persons.content}">4</div>-->
+    <!--    </div>-->
+    <form id="grid-buttons" th:action="@{'/update/' + ${persons.getId()}}" method="get">
+        <button class="grid-button" th:value="${persons.getId()}" name="update">Update</button>
     </form>
-    <form id="grid-buttons" action="view" method="get">
-        <button  class="grid-button" th:value="${persons.getId()}" name="laura">View</button>
+    <form id="grid-buttons" th:action="@{'/view/' + ${persons.getId()}}" method="get">
+        <button class="grid-button">View</button>
     </form>
-    <form id="grid-buttons" action="delete" method="get">
-        <button  class="grid-button" th:value="${persons.getId()}" name="delete">Delete</button>
+    <form id="grid-buttons" th:action="@{'/delete/' + ${persons.getId()}}" method="get">
+        <button class="grid-button" th:value="${persons.getId()}" name="delete">Delete</button>
     </form>
 
 </div>

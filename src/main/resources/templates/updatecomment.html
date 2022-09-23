@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>update Comment</title>
+</head>
+<style >
+    label {
+        display: inline-block;
+        width: 200px;
+        margin: 5px;
+        text-align: left;
+    }
+    input[type=text], input[type=password], select {
+        display: inline-block;
+        width: 200px;
+    }
+    input[type=radio] {
+        margin-left: 45px;
+    }
+    input[type=checkbox] {
+        margin-right: 190px;
+    }
+    button {
+        padding: 5px;
+        margin: 10px;
+    }
+</style>
+<body>
+<h1>Edit Comment</h1>
+<form action="#" th:action="@{'/updatescomment/' + ${comments.getId()}}" method="post" >
+
+    <label>name:</label>
+    <input type="text"  name="name" th:value="${comments.getName()}"/><br>
+<!---->
+    <label>email:</label>
+    <input type="email" name="email" th:value="${comments.getEmail()}" /><br>
+
+    <label>Comment:</label>
+    <textarea rows="10" cols="40" name="comment" th:value="${comments.getComment()}" th:text="${comments.getComment()}" ></textarea>
+    <br>
+
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

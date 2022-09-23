@@ -21,6 +21,6 @@ public class Tag {
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-    @ManyToMany( cascade = {CascadeType.ALL})
+    @ManyToMany(mappedBy = "tag")
     private List<Post> post;
 }
