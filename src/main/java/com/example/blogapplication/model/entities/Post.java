@@ -36,10 +36,12 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comment = new ArrayList<>();
 
-    @Override
-    public String toString() {
-        return "Post{" +
-                "comment=" + comment +
-                '}';
+    public String getTagsToString(){
+        String tagStr="";
+        for(Tag tag1: tag){
+            tagStr+= tag1.getName()+",";
+        }
+        return tagStr;
     }
+
 }

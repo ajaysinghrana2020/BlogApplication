@@ -19,7 +19,10 @@ public class PostsService {
     @Autowired
     TagsRepository tagsRepository;
 
-    public List<Post> getListOfPosts() {
+    public List<Post> getListOfPosts(String query) {
+        if(query != null){
+            return postsRepository.searchPost(query);
+        }
         List<Post> listOfPosts = postsRepository.findAll();
         return listOfPosts;
     }
@@ -36,7 +39,4 @@ public class PostsService {
     public void delete(Integer id){
         postsRepository.deleteById(id);
     }
-
-
-
 }

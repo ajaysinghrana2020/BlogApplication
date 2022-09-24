@@ -28,4 +28,13 @@ public class TagsService {
             }
         }
     }
+
+//    public List<Tag> filterTag(String query){
+//        if(query!=null){
+//            return tagsRepository.filterTags(query);
+//        }
+//        List<Tag> listofTags=tagsRepository.findAll();
+//        return listofTags;
+//
+//    }
 }

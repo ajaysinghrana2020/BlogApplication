@@ -36,7 +36,7 @@
         <input type="text"  name="title" th:value="${post.title}"/><br>
 
         <label>Tags:</label>
-<!--        <input type="text" name="tag" th:value="${post.tag}" /><br>-->
+        <input type="text" name="tag" th:value="${post.getTagsToString()}" /><br>
 
         <label>content:</label>
         <textarea rows="10" cols="40" name="content" th:value="${post.getContent()}" th:text="${post.getContent()}" ></textarea>

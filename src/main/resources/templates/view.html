@@ -83,8 +83,8 @@
 <div id="result-set" th:each="persons : ${listOfPosts}">
     <div id="grid-container">
         <div id="grid-items">
-            <div id="grid-labels">ID:</div>
-            <div class="grid-item" th:text="${persons.id}">1</div>
+            <div id="grid-labels">Tags:</div>
+            <div class="grid-item" th:text="${persons.getTagsToString()}">1</div>
         </div>
         <div id="grid-items">
             <div id="grid-labels">Title:</div>
