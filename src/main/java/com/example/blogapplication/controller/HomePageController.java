@@ -35,14 +35,55 @@ public class HomePageController {
     @Autowired
     CommentRepository commentRepository;
 
+//    @GetMapping("/")
+//    public String homePage(Model model, @Param("query") String query) {
+////        List<Post> page = postsService.getListOfPosts(query);
+//        List<Post> listOfPosts = postsService.getListOfPosts(query);
+//        model.addAttribute("listOfPosts", listOfPosts);
+//
+//        List<Tag> allOfTags =tagsService.allTags();
+//        model.addAttribute("allOfTags",allOfTags);
+//        return "homepage";
+//    }
+
     @GetMapping("/")
-    public String homePage(Model model, @Param("query") String query) {
-//        List<Post> page = postsService.getListOfPosts(query);
-        List<Post> listOfPosts = postsService.getListOfPosts(query);
-        model.addAttribute("listOfPosts", listOfPosts);
+    public String getAllPages(Model model ,@Param("query") String query){
+
 
         List<Tag> allOfTags =tagsService.allTags();
         model.addAttribute("allOfTags",allOfTags);
+        return getOnePage(model,1,query);
+    }
+    @GetMapping("/{pageNumber}")
+    public String getOnePage(Model model,@PathVariable("pageNumber") int currentPage, @Param("query") String query) {
+
+        Page<Post> page =postsService.findPage(currentPage);
+        int totalPages = page.getTotalPages();
+        long totalItems=page.getTotalElements();
+        List<Post> posts = page.getContent();
+
+        model.addAttribute("currentPage",currentPage);
+        model.addAttribute("totalPages",totalPages);
+        model.addAttribute("totalItems",totalItems);
+
+
+        if(query!=null){
+
+            List<Post> listOfPosts = postsService.getListOfPosts(query);
+            model.addAttribute("listOfPosts", listOfPosts);
+        }else{
+            model.addAttribute("listOfPosts", posts);
+        }
+        List<Tag> allOfTags =tagsService.allTags();
+        model.addAttribute("allOfTags",allOfTags);
+
+
+
+
+
+
+
+
         return "homepage";
     }
 

@@ -261,14 +261,14 @@
         <button class="grid-button" th:value="${persons.getId()}" name="delete">Delete</button>
     </form>
 </div>
-<!--<div>-->
-<!--    Total items :[[${totalItems}]] Page [[${currentPage}]] of [[${totalPages}]]-->
-<!--    &#45;&#45; &nbsp;-->
-<!--    <span th:each="i: ${#numbers.sequence(1,totalPages)}">-->
-<!--        <a th:href="@{'/page/'+ ${i}}">[[${i}]]</a> &nbsp; &nbsp;-->
-<!--    </span>-->
-<!--    <a th:href="@{'/page/'+ ${currentPage+1}}">Next Page</a>-->
-<!--</div>-->
+<div>
+    Total items :[[${totalItems}]] Page [[${currentPage}]] of [[${totalPages}]]
+    -- &nbsp;
+    <span th:each="i: ${#numbers.sequence(1,totalPages)}">
+        <a th:href="@{'/'+ ${i}}">[[${i}]]</a> &nbsp; &nbsp;
+    </span>
+    <a th:href="@{'/'+ ${currentPage+1}}">Next Page</a>
+</div>
 
 
 </body>

@@ -5,6 +5,9 @@ import com.example.blogapplication.model.entities.Tag;
 import com.example.blogapplication.repository.PostsRepository;
 import com.example.blogapplication.repository.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,6 +28,10 @@ public class PostsService {
         }
         List<Post> listOfPosts = postsRepository.findAll();
         return listOfPosts;
+    }
+    public Page<Post> findPage(int pageNumber){
+        Pageable pageable = PageRequest.of(pageNumber -1,2);
+        return postsRepository.findAll(pageable);
     }
 
     public Post getOnlyOne(Integer id) {
