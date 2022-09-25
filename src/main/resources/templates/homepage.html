@@ -124,10 +124,10 @@
 
         @media screen and (max-width: 600px) {
             .topnav .search-container {
-                float: none;
+                float: contour;
             }
             .topnav a, .topnav input[type=text], .topnav .search-container button {
-                float: none;
+                float: contour;
                 display: block;
                 text-align: left;
                 width: 100%;
@@ -138,6 +138,40 @@
                 border: 1px solid #ccc;
             }
         }
+        .dropbtn {
+            background-color: #04AA6D;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            z-index: 1;
+            position: relative;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {background-color: #ddd;}
+
+        .dropdown:hover .dropdown-content {display: block;}
+
+        .dropdown:hover .dropbtn {background-color: #3e8e41;}
     </style>
 </head>
 
@@ -145,7 +179,18 @@
 <div class="topnav">
 <!--    <a class="active" href="#home">Home</a>-->
     <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <div class="dropdown">
+        <button class="dropbtn">Dropdown</button>
+        <div class="dropdown-content">
+            <form action="">
+                <div th:each="tag : ${allOfTags}">
+                <input type="checkbox" id="vehicle1" name="vehicle1" th:value="${tag.name}">
+                <label for="vehicle1" th:text="${tag.name}"></label><br>
+                </div>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
     <div class="search-container">
         <form th:action="@{/}" >
             <input type="text" placeholder="Search.." name="query" required>
@@ -215,8 +260,15 @@
     <form id="grid-buttons" th:action="@{'/delete/' + ${persons.getId()}}" method="get">
         <button class="grid-button" th:value="${persons.getId()}" name="delete">Delete</button>
     </form>
-
 </div>
+<!--<div>-->
+<!--    Total items :[[${totalItems}]] Page [[${currentPage}]] of [[${totalPages}]]-->
+<!--    &#45;&#45; &nbsp;-->
+<!--    <span th:each="i: ${#numbers.sequence(1,totalPages)}">-->
+<!--        <a th:href="@{'/page/'+ ${i}}">[[${i}]]</a> &nbsp; &nbsp;-->
+<!--    </span>-->
+<!--    <a th:href="@{'/page/'+ ${currentPage+1}}">Next Page</a>-->
+<!--</div>-->
 
 
 </body>

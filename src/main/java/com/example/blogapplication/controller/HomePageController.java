@@ -8,6 +8,7 @@ import com.example.blogapplication.service.CommentService;
 import com.example.blogapplication.service.PostsService;
 import com.example.blogapplication.service.TagsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,8 +37,12 @@ public class HomePageController {
 
     @GetMapping("/")
     public String homePage(Model model, @Param("query") String query) {
+//        List<Post> page = postsService.getListOfPosts(query);
         List<Post> listOfPosts = postsService.getListOfPosts(query);
         model.addAttribute("listOfPosts", listOfPosts);
+
+        List<Tag> allOfTags =tagsService.allTags();
+        model.addAttribute("allOfTags",allOfTags);
         return "homepage";
     }
 
@@ -65,7 +70,7 @@ public class HomePageController {
         for (String tag : tagsName) {
             tagName.add(tag.trim());
         }
-        System.out.println(tagName);
+
         List<Tag> listOfTags = new ArrayList<>();
 
         for (String tag : tagName) {
@@ -193,6 +198,8 @@ public class HomePageController {
         int post_id = comment.getPost().getId();
         return "redirect:/view/" + post_id;
     }
+
+
 
 
 }

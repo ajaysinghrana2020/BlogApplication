@@ -1,5 +1,6 @@
 package com.example.blogapplication.service;
 
+import com.example.blogapplication.model.entities.Post;
 import com.example.blogapplication.model.entities.Tag;
 import com.example.blogapplication.repository.TagsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,4 +38,8 @@ public class TagsService {
 //        return listofTags;
 //
 //    }
+    public List<Tag> allTags(){
+        List<Tag> listOfTag = tagsRepository.findAll();
+        return listOfTag;
+    }
 }
