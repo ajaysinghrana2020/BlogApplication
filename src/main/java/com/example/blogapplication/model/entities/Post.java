@@ -30,7 +30,7 @@ public class Post {
     private LocalDateTime createdAt;
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-    @ManyToMany (cascade = {CascadeType.ALL} )
+    @ManyToMany (cascade = {CascadeType.PERSIST,CascadeType.MERGE} )
     private List<Tag> tag;
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)

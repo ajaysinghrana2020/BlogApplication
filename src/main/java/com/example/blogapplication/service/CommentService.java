@@ -14,24 +14,25 @@ public class CommentService {
     @Autowired
     CommentRepository commentRepository;
 
-    public List<Comment> getListOfComments(){
+    public List<Comment> getListOfComments() {
         List<Comment> listOfComments = commentRepository.findAll();
 
-        return  listOfComments;
+        return listOfComments;
     }
 
-    public void saveComment(Comment comments){
+    public void saveComment(Comment comments) {
 
         commentRepository.save(comments);
     }
+
     public Comment getOnlyOne(Integer id) {
         Comment comment = commentRepository.findById(id).get();
         return comment;
     }
-    public void delete(Integer id){
+
+    public void delete(Integer id) {
         commentRepository.deleteById(id);
     }
-
 
 
 }

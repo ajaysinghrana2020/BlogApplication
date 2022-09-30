@@ -4,6 +4,7 @@ import com.example.blogapplication.model.entities.Comment;
 import com.example.blogapplication.model.entities.Post;
 import com.example.blogapplication.model.entities.Tag;
 import com.example.blogapplication.repository.CommentRepository;
+import com.example.blogapplication.repository.PostsRepository;
 import com.example.blogapplication.service.CommentService;
 import com.example.blogapplication.service.PostsService;
 import com.example.blogapplication.service.TagsService;
@@ -17,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -35,55 +35,36 @@ public class HomePageController {
     @Autowired
     CommentRepository commentRepository;
 
-//    @GetMapping("/")
-//    public String homePage(Model model, @Param("query") String query) {
-////        List<Post> page = postsService.getListOfPosts(query);
-//        List<Post> listOfPosts = postsService.getListOfPosts(query);
-//        model.addAttribute("listOfPosts", listOfPosts);
-//
-//        List<Tag> allOfTags =tagsService.allTags();
-//        model.addAttribute("allOfTags",allOfTags);
-//        return "homepage";
-//    }
+    @Autowired
+    PostsRepository postsRepository;
+
 
     @GetMapping("/")
-    public String getAllPages(Model model ,@Param("query") String query){
-
-
-        List<Tag> allOfTags =tagsService.allTags();
-        model.addAttribute("allOfTags",allOfTags);
-        return getOnePage(model,1,query);
+    public String getAllPages(Model model, @Param("query") String query) {
+        return getOnePage(model, 1, query);
     }
-    @GetMapping("/{pageNumber}")
-    public String getOnePage(Model model,@PathVariable("pageNumber") int currentPage, @Param("query") String query) {
 
-        Page<Post> page =postsService.findPage(currentPage);
+    @GetMapping("/{pageNumber}")
+    public String getOnePage(Model model, @PathVariable("pageNumber") int currentPage, @Param("query") String query) {
+
+        Page<Post> page = postsService.findPage(currentPage);
         int totalPages = page.getTotalPages();
-        long totalItems=page.getTotalElements();
+        long totalItems = page.getTotalElements();
         List<Post> posts = page.getContent();
 
-        model.addAttribute("currentPage",currentPage);
-        model.addAttribute("totalPages",totalPages);
-        model.addAttribute("totalItems",totalItems);
+        model.addAttribute("currentPage", currentPage);
+        model.addAttribute("totalPages", totalPages);
+        model.addAttribute("totalItems", totalItems);
 
 
-        if(query!=null){
-
+        if (query != null) {
             List<Post> listOfPosts = postsService.getListOfPosts(query);
             model.addAttribute("listOfPosts", listOfPosts);
-        }else{
+        } else {
             model.addAttribute("listOfPosts", posts);
         }
-        List<Tag> allOfTags =tagsService.allTags();
-        model.addAttribute("allOfTags",allOfTags);
-
-
-
-
-
-
-
-
+        List<Tag> allOfTags = tagsService.allTags();
+        model.addAttribute("allOfTags", allOfTags);
         return "homepage";
     }
 
@@ -104,19 +85,16 @@ public class HomePageController {
         post.setCreatedAt(LocalDateTime.now());
         post.setUpdatedAt(LocalDateTime.now());
 
-        String http = request.getParameter("tag");
-        List<String> tagsName = List.of(http.toLowerCase().split(","));
+        String tagString = request.getParameter("tag");
+        List<String> tagsName = List.of(tagString.toLowerCase().split(","));
 
         List<String> tagName = new ArrayList<>();
         for (String tag : tagsName) {
             tagName.add(tag.trim());
         }
-
         List<Tag> listOfTags = new ArrayList<>();
-
         for (String tag : tagName) {
             Tag tags = new Tag();
-
             tags.setName(tag);
             tags.setCreatedAt(LocalDateTime.now());
             tags.setUpdatedAt(LocalDateTime.now());
@@ -175,7 +153,6 @@ public class HomePageController {
     @PostMapping("/updates/{id}")
     public String greetingForm(@PathVariable Integer id, HttpServletRequest request, Model model) {
         Post post = postsService.getOnlyOne(id);
-        System.out.println("IRON MAN");
 
         post.setTitle(request.getParameter("title"));
         System.out.println(post.getTitle());
@@ -197,18 +174,14 @@ public class HomePageController {
 
         for (String tag : tagName) {
             Tag tags = new Tag();
-
             tags.setName(tag);
-
             tags.setUpdatedAt(LocalDateTime.now());
             listOfTags.add(tags);
         }
         post.setTag(listOfTags);
         System.out.println(listOfTags);
         tagsService.insertTags(listOfTags);
-
         postsService.save(post);
-//            return "redirect:/view?laura"+id;
         return "redirect:/";
     }
 
@@ -240,7 +213,15 @@ public class HomePageController {
         return "redirect:/view/" + post_id;
     }
 
-
+    @GetMapping("/tagsSelection")
+    public String gettingListOfTags(@RequestParam("tag") String[] tags, Model model) {
+        List<Post> posts = new ArrayList<>();
+        for (String post3 : tags) {
+            posts.addAll(postsRepository.findAllByTagName(post3));
+        }
+        model.addAttribute("listOfPosts", posts);
+        return "newhomepage";
+    }
 
 
 }
